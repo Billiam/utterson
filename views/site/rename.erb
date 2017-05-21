@@ -14,7 +14,7 @@
         <% end %>
     <% end %>
 
-    <form method="post" action="/site/rename">
+    <form method="post" action="<%= url_to('/rename') %>">
 
         <div class="col-md-6">
 
@@ -24,7 +24,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
-            <a class="btn btn-default" href="/site/configuration" role="button">Cancel</a>
+            <a class="btn btn-default" href="<%= url_to('/site/configuration') %>" role="button">Cancel</a>
 
         </div>
 

@@ -1,11 +1,11 @@
-<h1 class="page-header"><%= post.id.gsub( /\.markdown$/, '') %></h1>
+<h1 class="page-header"><%= post.human_id %></h1>
 
 <div class="row">
 
     <% if request.request_method == "POST" %>
         <% if post.error_messages.length == 0 %>
             <div class="alert alert-success" role="alert">
-                <strong>Awesome!</strong> Categories was updated, should we also <a href="/deploy">deploy this change</a>?
+                <strong>Awesome!</strong> Categories was updated, should we also <a href="<%= url_to('/deploy') %>">deploy this change</a>?
             </div>
         <% else %>
             <div class="alert alert-danger" role="alert">
@@ -18,7 +18,7 @@
 
         <h3>Categories</h3>
 
-        <form method="post" action="/post/categories/<%= post.id %>?action=remove">
+        <form method="post" action="<%= url_to("/post/categories/#{ post.id }?action=remove") %>">
 
             <table class="table table-striped">
                 <tbody>
@@ -32,7 +32,7 @@
             </table>
 
             <button type="submit" class="btn btn-primary">Remove</button>
-            <a class="btn btn-default" href="/post/edit/<%= post.id %>" role="button">Back to post</a>
+            <a class="btn btn-default" href="<%= url_to("/post/edit/#{post.id}") %>" role="button">Back to post</a>
         </form>
 
     </div>
@@ -40,7 +40,7 @@
     <div class="col-md-4">
         <h3>Existing categories</h3>
 
-        <form method="post" action="/post/categories/<%= post.id %>?action=add">
+        <form method="post" action="<%= url_to("/post/categories/#{ post.id }?action=add") %>">
 
             <table class="table table-striped">
                 <tbody>
@@ -61,7 +61,7 @@
     </div>
     <div class="col-md-4">
 
-        <form method="post" action="/post/categories/<%= post.id %>?action=create">
+        <form method="post" action="<%= url_to("/post/categories/#{ post.id }?action=create") %>">
             <h3>New category</h3>
 
             <div class="form-group">

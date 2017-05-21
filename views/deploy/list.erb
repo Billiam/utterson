@@ -24,9 +24,9 @@
             <tr>
                 <td>
                 <% if config['confirm'] %>
-                    <a href="/deploy/to/<%= environment %>" class="btn btn-primary" role="button">Deploy to <%= environment %></a>
+                    <a href="<%= url_to("/deploy/to/#{environment}") %>" class="btn btn-primary" role="button">Deploy to <%= environment %></a>
                 <% else %>
-                    <form method="post" action="/deploy/to/<%= environment %>/confirmed">
+                    <form method="post" action="<%= url_to("/deploy/to/#{ environment}/confirmed") %>">
                         <button type="submit" class="btn btn-primary">Deploy to <%= environment %></button>
                     </form>
                 <% end %>

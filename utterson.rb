@@ -6,37 +6,34 @@ require 'shellwords'
 
 Bundler.require(:default)
 
-# Lib
-require_relative 'lib/commandline'
-
-# Models
-require_relative 'models/site.rb'
-require_relative 'models/post.rb'
-
-# Routes
-require_relative 'routes/hyde.rb'
-require_relative 'routes/site.rb'
-require_relative 'routes/page.rb'
-require_relative 'routes/post.rb'
-require_relative 'routes/deploy.rb'
-
-# Enable sessions
-# FIXME: The secret is random enough for now
-use Rack::Session::Cookie, :expire_after => 3600, :secret => 'lbmjgwktggceepkuomsduvysqbuvhxbu'
-
 class Utterson < Sinatra::Application
+    register Sinatra::Namespace
 
     set :sites_dir, 'sites/'
 
-    before do
-        unless ['/','/hyde/sites','/hyde/create','/hyde/select'].include? request.path_info
-            redirect '/hyde/sites' if session[:site_id].nil?
+    def self.with_site(&block)
+        namespace '/site/:site_id' do
+            before do
+                @site_id = params[:site_id]
+            end
+
+            instance_eval(&block)
         end
+    end
+
+    def site_id
+        @site_id
+    end
+
+    def current_site
+        @current_site ||= Site.get site_id if site_id
     end
 
     get '/' do
         redirect '/hyde/sites'
     end
-
 end
 
+%w(lib models routes).each do |directory|
+    Dir["./#{directory}/**/*.rb"].each { |file| require file }
+end

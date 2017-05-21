@@ -23,6 +23,10 @@ class Post
         return '_posts/' + @id
     end
 
+    def human_id
+        id.sub(/\.markdown\z/, '')
+    end
+
     def load site_id, post_id
         @id = post_id
         @site_id = site_id

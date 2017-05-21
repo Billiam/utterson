@@ -5,7 +5,7 @@
     <% if request.request_method == "POST" %>
         <% if post.error_messages.length == 0 %>
             <div class="alert alert-success" role="alert">
-                <strong>Awesome!</strong> Post was successfully saved, should we also <a href="/deploy">deploy this change</a>?
+                <strong>Awesome!</strong> Post was successfully saved, should we also <a href="<%= url_to('/deploy') %>">deploy this change</a>?
             </div>
         <% else %>
             <div class="alert alert-danger" role="alert">
@@ -14,7 +14,7 @@
         <% end %>
     <% end %>
 
-    <form method="post" action="/post/create">
+    <form method="post" action="<%= url_to('/post/create') %>">
 
         <div class="col-md-8">
 

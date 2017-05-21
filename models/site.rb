@@ -7,6 +7,10 @@ class Site
         @error_messages = Array.new
     end
 
+    def title
+        config[:title]
+    end
+
     def config_filename
         Utterson.settings.sites_dir + @id + '/' + self.git_config_filename
     end

@@ -4,14 +4,14 @@
 
     <% unless params['created'].nil? %>
         <div class="alert alert-success" role="alert">
-            <strong>Awesome!</strong> Jekyll site was successfully created. You can edit settings here or start <a href="/post/list">creating posts</a>?
+            <strong>Awesome!</strong> Jekyll site was successfully created. You can edit settings here or start <a href="<%= url_to('') %>">creating posts</a>?
         </div>
     <% end %>
 
     <% if request.request_method == "POST" %>
         <% unless site.errors %>
             <div class="alert alert-success" role="alert">
-                <strong>Awesome!</strong> Configuration was successfully saved, care to <a href="/deploy">deploy this change</a>?
+                <strong>Awesome!</strong> Configuration was successfully saved, care to <a href="<%= url_to('/deploy') %>">deploy this change</a>?
             </div>
         <% else %>
             <div class="alert alert-danger" role="alert">
@@ -20,7 +20,7 @@
         <% end %>
     <% end %>
 
-    <form method="post" action="/site/configuration">
+    <form method="post" action="<%= url_to('/configuration') %>">
 
         <div class="col-md-6">
 
@@ -55,9 +55,7 @@
             </div>
 
             <h3>More options</h3>
-            <a class="btn btn-primary" href="/site/rename" role="button">Rename Site</a>
-            <!--<a class="btn btn-danger" href="/site/delete" role="button">Delete Site</a>-->
-
+            <a class="btn btn-primary" href="<%= url_to('/rename') %>" role="button">Rename Site</a>
         </div>
 
     </form>

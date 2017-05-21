@@ -15,7 +15,7 @@
 <% end %>
 
 <div class="row">
-    <form method="post" action="/deploy/to/<%= env_name %>/confirmed">
+    <form method="post" action="<%= url_to("/deploy/to/#{ env_name}/confirmed") %>">
 
         <div class="col-md-12">
             <div class="form-group">

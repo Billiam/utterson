@@ -5,14 +5,14 @@
     <% if request.request_method == "POST" %>
 
         <div class="alert alert-success" role="alert">
-            <strong>Awesome!</strong> Post was successfully deleted, should we also <a href="/deploy">deploy this change</a>?
+            <strong>Awesome!</strong> Post was successfully deleted, should we also <a href="<%= url_to('/deploy') %>">deploy this change</a>?
         </div>
 
-        <a class="btn btn-primary" href="/post/list" role="button">Continue</a>
+        <a class="btn btn-primary" href="<%= url_to('/post/list') %>" role="button">Continue</a>
 
     <% else %>
 
-        <form method="post" action="/post/delete/<%= post.id %>">
+        <form method="post" action="<%= url_to("/post/delete/#{post.id}") %>">
 
             <div class="col-md-8">
 
@@ -27,7 +27,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-danger">Confirm Delete</button>
-                <a class="btn btn-default" href="/post/edit/<%= post.id %>" role="button">Cancel</a>
+                <a class="btn btn-default" href="<%= url_to("/post/edit/#{post.id}") %>" role="button">Cancel</a>
 
             </div>
             <div class="col-md-4">

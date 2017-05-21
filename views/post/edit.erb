@@ -1,17 +1,17 @@
-<h1 class="page-header"><%= post.id.gsub( /\.markdown$/, '') %></h1>
+<h1 class="page-header"><%= post.human_id %></h1>
 
 <div class="row">
 
     <% unless params['created'].nil? %>
         <div class="alert alert-success" role="alert">
-            <strong>Awesome!</strong> Post was successfully created. You can keep editing or <a href="/deploy">deploy it</a>?
+            <strong>Awesome!</strong> Post was successfully created. You can keep editing or <a href="<%= url_to('/deploy') %>">deploy it</a>?
         </div>
     <% end %>
 
     <% if request.request_method == "POST" %>
         <% if post.error_messages.length == 0 %>
             <div class="alert alert-success" role="alert">
-                <strong>Awesome!</strong> Post was successfully saved, should we also <a href="/deploy">deploy this change</a>?
+                <strong>Awesome!</strong> Post was successfully saved, should we also <a href="<%= url_to('/deploy') %>">deploy this change</a>?
             </div>
         <% else %>
             <div class="alert alert-danger" role="alert">
@@ -20,7 +20,7 @@
         <% end %>
     <% end %>
 
-    <form method="post" action="/post/edit/<%= post.id %>">
+    <form method="post" action="<%= url_to("/post/edit/#{post.id}") %>">
 
         <div class="col-md-8">
 
@@ -35,7 +35,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
-            <a class="btn btn-default" href="/post/list" role="button">Cancel</a>
+            <a class="btn btn-default" href="<%= url_to('') %>" role="button">Cancel</a>
 
         </div>
         <div class="col-md-4">
@@ -70,9 +70,8 @@
             </div>
 
             <h3>More options</h3>
-            <!--<a class="btn btn-primary" href="/post/rename/<%= post.id %>" role="button">Rename Post</a>-->
-            <a class="btn btn-primary" href="/post/categories/<%= post.id %>" role="button">Categories</a>
-            <a class="btn btn-danger" href="/post/delete/<%= post.id %>" role="button">Delete Post</a>
+            <a class="btn btn-primary" href="<%= url_to("/post/categories/#{ post.id }") %>" role="button">Categories</a>
+            <a class="btn btn-danger" href="<%= url_to("/post/delete/#{ post.id }") %>" role="button">Delete Post</a>
 
         </div>
 

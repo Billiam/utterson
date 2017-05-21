@@ -8,12 +8,12 @@
 
 <div class="row">
 
-    <form method="post" action="/deploy/to/<%= env_name %>/confirmed">
+    <form method="post" action="<%= url_to("/deploy/to/#{env_name}/confirmed") %>">
 
         <div class="col-md-12">
 
             <button type="submit" class="btn btn-danger">Confirm deploy</button>
-            <a class="btn btn-default" href="/deploy" role="button">Cancel</a>
+            <a class="btn btn-default" href="<%= url_to('/deploy') %>" role="button">Cancel</a>
 
             <h3>Commands to be executed</h3>
 

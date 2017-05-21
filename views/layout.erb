@@ -25,10 +25,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
-            <li><a href="/hyde/sites">Switch website</a></li>
-            <li><a href="/hyde/create">Create website</a></li>
-            <!--<li><a href="/hyde/about">About</a></li>-->
-            <!--<li><a href="/hyde/help">Help</a></li>-->
+            <li><a href="<%= url('/hyde/sites') %>">Switch website</a></li>
+            <li><a href="<%= url('/hyde/create') %>">Create website</a></li>
           </ul>
         </div>
       </div>
@@ -38,18 +36,16 @@
       <div class="row">
 
         <div class="col-sm-3 col-md-2 sidebar">
-          <% if session[:site_id] %>
-
-            <h4><%= session[:site_id] %></h4>
-            <p><%= session[:site_title] %></p>
+          <% if current_site %>
+            <h4><%= current_site.id %></h4>
+            <p><%= current_site.title %></p>
 
             <ul class="nav nav-sidebar">
-              <!--<li<% if request.path_info =~ /^\/page\// %> class="active"<% end %>><a href="/page/list">Pages</a></li>-->
-              <li<% if request.path_info =~ /^\/post\// %> class="active"<% end %>><a href="/post/list">Posts</a></li>
+              <li<% if request.path_info == path_to('') %> class="active"<% end %>><a href="<%= url_to('') %>">Posts</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-              <li<% if request.path_info =~ /^\/deploy/ %> class="active"<% end %>><a href="/deploy">Deploy</a></li>
-              <li<% if request.path_info =~ /^\/site\// %> class="active"<% end %>><a href="/site/configuration">Configuration</a></li>
+              <li<% if request.path_info == path_to('/deploy') %> class="active"<% end %>><a href="<%= url_to('/deploy') %>">Deploy</a></li>
+              <li<% if [path_to('/configuration') , path_to('/rename')].include? request.path_info %> class="active"<% end %>><a href="<%= url_to('/configuration') %>">Configuration</a></li>
             </ul>
 
           <% end %>
